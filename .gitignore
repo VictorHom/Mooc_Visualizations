@@ -1,0 +1,8 @@
+node_modules/
+.idea/
+dataverse_files/
+data/
+*.pdf
+*.zip
+*.csv
+cleanDataArray.js

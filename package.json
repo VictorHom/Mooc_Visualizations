@@ -1,0 +1,18 @@
+{
+  "name": "educationAnalysis",
+  "version": "1.0.0",
+  "description": "",
+  "main": "CourseCodeMap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "victor hom",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.1.1",
+    "chalk": "^1.1.1",
+    "csvtojson": "^0.5.1",
+    "mongoose": "^4.3.4"
+  }
+}

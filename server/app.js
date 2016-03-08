@@ -1,22 +1,19 @@
 "use strict";
+import path from 'path';
+import express from 'express';
+import bodyParser from 'body-parser';
+import passport from 'passport';
+import flash from 'flash';
+import morgan from 'morgan';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
-var path = require('path'),
-	express = require('express'),
-	bodyParser = require('body-parser'),
-	passport = require('passport'),
-	flash = require('flash'),
-	morgan = require('morgan'),
-	cookieParser = require('cookie-parser'),
-	session = require('express-session');
-
-
-var app = express();
-
+const app = express();
 module.exports = app;
 
-var publicPath = path.join(__dirname, '../public');
-var nodeModulesPath = path.join(__dirname, '../node_modules');
-var indexHtmlPath = path.join(__dirname, '../index.html');
+let publicPath = path.join(__dirname, '../public');
+let nodeModulesPath = path.join(__dirname, '../node_modules');
+let indexHtmlPath = path.join(__dirname, '../index.html');
 
 // sserving up the static assets
 app.use(express.static(publicPath));
@@ -33,11 +30,10 @@ app.use(passport.session());
 // app.use(flash());
 
 //app.use('/api/students', require('./students'));
-app.get('/*', function(req,res) {
-	console.log("index get");
+app.get('/*', (req,res) => {
 	res.sendFile(indexHtmlPath);
 });
 
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
 	res.status(err.status).send(err.message);
 });

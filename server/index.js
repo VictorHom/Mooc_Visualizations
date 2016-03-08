@@ -1,3 +1,5 @@
+require("babel-register");
+// require('babel-core/register');
 var http = require('http');
 var server = http.createServer();
 var app = require('./app');

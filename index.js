@@ -25,3 +25,4 @@ startDbPromise.then(function () {
 });
 
 module.exports = startDbPromise;
+

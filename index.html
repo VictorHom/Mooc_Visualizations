@@ -3,9 +3,41 @@
 	<head>
 	    <base href="/">
 		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css">
 		<title>Data Viz on Moocs</title>
 	</head>
 	<body>
 		<p>Hello World</p>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.js"></script>
+		<script>
+			// trying stuff
+			var camera, scene, renderer;
+			var geometry, material, mesh;
+			// a Scene class represents a list of objects that affect what is displayed ont eh screen, such as 3d models and lights
+			scene = new THREE.Scene();
+
+			// a mesh object can be displayed in a scene
+			// instantiated using the THREE.Mesh constructor;
+			// it consists of geometry, which is the object's shape and a material, which is a color, image, or other texture that defines how the faces of the shape appear.
+
+			geometry = new THREE.IcosahedronGeometry(200, 1);
+							// color : 0x000000,
+			material = new THREE.MeshBasicMaterial({
+
+				wireframe : true,
+				wireframeLinewidth : 2
+			});
+
+			mesh = new THREE.Mesh(geometry, material);
+			scene.add(mesh);
+			//renderer = new THREE.CanvasRenderer();
+			renderer = new THREE.WebGLRenderer();
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			document.body.appendChild(renderer.domElement);
+
+			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.
+     innerHeight, 1, 1000);
+     camera.position.z = 500;
+		</script>
 	</body>
 </html>

@@ -13,10 +13,12 @@ module.exports = app;
 
 let publicPath = path.join(__dirname, '../public');
 let nodeModulesPath = path.join(__dirname, '../node_modules');
+let bowerModulesPath = path.join(__dirname, '../bower_components');
 let indexHtmlPath = path.join(__dirname, '../index.html');
 
 // sserving up the static assets
 app.use(express.static(publicPath));
+app.use(express.static(bowerModulesPath));
 app.use(express.static(nodeModulesPath));
 app.use(morgan('dev'));
 app.use(cookieParser());

@@ -10,34 +10,85 @@
 		<p>Hello World</p>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.js"></script>
 		<script>
-			// trying stuff
-			var camera, scene, renderer;
-			var geometry, material, mesh;
-			// a Scene class represents a list of objects that affect what is displayed ont eh screen, such as 3d models and lights
-			scene = new THREE.Scene();
+		   ////// ///////////////
+		   var height = 500;
+		   var width = 500;
+		   /// MAKE A CANVAS
+		   var renderer = new THREE.WebGLRenderer({antialias : true });
+		   renderer.setSize(width, height);
 
-			// a mesh object can be displayed in a scene
-			// instantiated using the THREE.Mesh constructor;
-			// it consists of geometry, which is the object's shape and a material, which is a color, image, or other texture that defines how the faces of the shape appear.
+		   document.body.appendChild(renderer.domElement);
+		   renderer.setClearColor(0xEEEEEE, 1.0);
+		   renderer.clear();
 
-			geometry = new THREE.IcosahedronGeometry(200, 1);
-							// color : 0x000000,
-			material = new THREE.MeshBasicMaterial({
+		   ////// CREATE A CAMERA
+		   // takes a FOV, viewAspectRatio, zNear, zFar
+		   var camera = new THREE.PerspectiveCamera(45, width/height, 1, 10000);
+		   camera.position.z = 300;
 
-				wireframe : true,
-				wireframeLinewidth : 2
-			});
+		   // a scene
+		   var scene = new THREE.Scene();
+		   // a cube
+		   var cube = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), 
+		   							new THREE.MeshBasicMaterial({color : 0x000000 }));
+		   scene.add(cube);
+		   // we have a black square on a canvas
+		   renderer.render(scene, camera);
 
-			mesh = new THREE.Mesh(geometry, material);
-			scene.add(mesh);
-			//renderer = new THREE.CanvasRenderer();
-			renderer = new THREE.WebGLRenderer();
-			renderer.setSize(window.innerWidth, window.innerHeight);
-			document.body.appendChild(renderer.domElement);
+		   // animations now
+		   function animate(t) {
+		   	camera.position.x = Math.sin(t/1000) * 300;
+		   	camera.position.y = 150;
+		   	camera.position.z = Math.cos(t/1000) * 300;
+		   	// you need to update lookAt on every frame;
+		   	camera.lookAt(scene.position);
+		   	// renderer automatically clears unless autoClear = false;
+		   	renderer.render(scene, camera);
+		   	window.requestAnimationFrame(animate, renderer.domElement);
+		   }
 
-			camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.
-     innerHeight, 1, 1000);
-     camera.position.z = 500;
+		   animate(new Date().getTime());
+
+		   // Lights
+		   // without light, we live in the dark
+		   var light = new THREE.SpotLight();
+		   light.position.set(170, 330, -160);
+		   scene.add(light);
+
+		   // and a lit cube
+		   var litCube = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), new THREE.MeshLambertMaterial({color : 0xFFFFFF}));
+		   litCube.position.y = 50;
+		   scene.add(litCube);
+
+		   // enable shadows on the renderer
+		   renderer.shadowMapEnabled = true;
+		   // enable shadows for a light
+		   light.castShadow = true;
+
+		   // enable shadows for an object
+		   litCube.castShadow = true;
+		   litCube.receiveShadow = true;
+
+		   var planeGeo = new THREE.PlaneGeometry(400, 200, 10, 10);
+		   var planeMat = new THREE.MeshLambertMaterial({ color : 0xFFFFFF });
+		   var plane = new THREE.Mesh(planeGeo, planeMat);
+
+		   plane.rotation.x = -Math.PI/2;
+		   plane.position.y = -25;
+		   plane.receiveShadow = true;
+		   scene.add(plane);
+		   var t = Date.now();
+		   //make the cube spin
+		   litCube.position.x = Math.cos(t/600) * 85;
+		   litCube.position.y = 60-Math.sin(t/900) * 85;
+		   litCube.position.z = Math.sin(t/600) * 85;
+
+		   litCube.rotation.x = t/ 500;
+		   litCube.rotation.y = t/ 800;
+
+
+
 		</script>
+   
 	</body>
 </html>

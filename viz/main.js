@@ -3,9 +3,7 @@ import './styles.scss';
 import React from 'react';
 import ReactDom from 'react-dom';
 import { drawCube } from './cube.js';
-// var Coordinates = require('../public/public/Coordinates.js');
-// require('../public/public/OrbitAndPanControls.new.js');
-// import * from 'three';
+import { drawCubePlain } from './cubePlane.js';
 
 var Test = React.createClass({
 	render() {
@@ -20,3 +18,4 @@ var Test = React.createClass({
 // add in react router;
 ReactDom.render(<Test/>, document.getElementById("mooc_visualizations"));
 drawCube();
+drawCubePlain();

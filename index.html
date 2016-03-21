@@ -9,10 +9,11 @@
 	<body>
 		<p>Hello World</p>
 		<div id="mooc_visualizations"></div>
+    <div id="WebGL-output"></div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r74/three.js"></script>
 		<!--<script type="text/javascript" src="/public/OrbitAndPanControls.new.js"></script>-->
-		
-		
+
+
 		<script>
 		   ////// ///////////////
 		   var height = 500;
@@ -33,7 +34,7 @@
 		   // a scene
 		   var scene = new THREE.Scene();
 		   // a cube
-		   var cube = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50), 
+		   var cube = new THREE.Mesh(new THREE.CubeGeometry(50, 50, 50),
 		   							new THREE.MeshBasicMaterial({color : 0x000000 }));
 		   scene.add(cube);
 		   // we have a black square on a canvas
